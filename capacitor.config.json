@@ -1,0 +1,12 @@
+{
+  "appId": "com.nepaliradio.app",
+  "appName": "नेपाली रेडियो",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "http",
+    "cleartext": true
+  },
+  "plugins": {
+    "CapacitorHttp": { "enabled": true }
+  }
+}
