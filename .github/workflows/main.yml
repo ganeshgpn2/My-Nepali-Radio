@@ -31,6 +31,9 @@ jobs:
       - name: Add Android platform
         run: npx cap add android
 
+      - name: Add native player and widget
+        run: python3 native_setup.py
+
       - name: Sync web files into Android project
         run: npx cap sync android
 
