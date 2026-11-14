@@ -1897,7 +1897,8 @@ var PLMAP={bg:"--pl-bg",ink:"--pl-ink",mut:"--pl-mut",line:"--pl-line",chip:"--p
 var plIdx=Number(ls("nr-plt",0));if(!(plIdx>=0&&plIdx<PLT.length))plIdx=0;
 function applyPl(i){var el=$("pl"),t=PLT[i],st=el.style;
   Object.keys(PLMAP).forEach(function(k){if(t.bg)st.setProperty(PLMAP[k],t[k]);else st.removeProperty(PLMAP[k])});
-  if(t.bg)el.setAttribute("data-pt",String(i));else el.removeAttribute("data-pt")}
+  if(t.bg)el.setAttribute("data-pt",String(i));else el.removeAttribute("data-pt");
+  try{if(NATIVE&&typeof Android.setWidgetTheme==="function")Android.setWidgetTheme(JSON.stringify(t.bg?t:{}))}catch(e){}}
 function plMark(){var b=$("st-plsw").children;for(var i=0;i<b.length;i++)b[i].setAttribute("aria-pressed",String(i===plIdx))}
 function setPl(i,save){plIdx=i;applyPl(i);if(save)lw("nr-plt",i);$("st-pl").value=String(i);plMark()}
 (function(){var o="",w=$("st-plsw");
@@ -2509,7 +2510,7 @@ function wdRow(a){var N=["आ","सो","मं","बु","बि","शु","श
 function natPlay(){var _c=cur;
   var l=(visible.length?visible:S).filter(function(x){return x.u}),i=l.findIndex(function(x){return x.k===cur.k});
   if(i<0){l=[cur];i=0}
-  Android.playQueue(JSON.stringify(l.slice(0,400).map(function(x){return{k:x.k,n:x.n,u:(x.k===_c.k?curUrl(x):x.u),f:x.f||0}})),Math.min(i,399),vol)}
+  Android.playQueue(JSON.stringify(l.slice(0,400).map(function(x){return{k:x.k,n:x.n,u:(x.k===_c.k?curUrl(x):x.u),f:x.f||0,l:(x.k===_c.k&&typeof x.l==="string"&&x.l.indexOf("data:")===0)?x.l:""}})),Math.min(i,399),vol)}
 function natSync(){
   if(!NATIVE)return;
   try{
